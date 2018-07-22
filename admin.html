@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %} Admin {% endblock %}
+{% block content %}
+<h1> Admin </h1>
+
+{% if error %}
+<h2> {{ error }} </h2>
+{% endif %} 
+
+{% if okmsg %}
+<h2> {{ okmsg }} </h2>
+{% endif %} 
+
+<h2> Add new poll </h2>
+<form action="/admin/add/" method="POST">
+    Poll name: <input type="text" name="pname"/><br/>
+    Field list (comma separated): <input type="text" name="fields"/><br/>
+    <input type="submit" value="add poll" />
+</form>
+
+<h2> Set current poll </h2>
+<form action="/admin/set/" method="POST">
+    <select name="pname">
+    {% for poll in polls %}
+    <option {% if poll.name ==  currentpoll  %} selected = "selected" {% endif %} >
+        {{ poll.name }}
+    </option>
+    {% endfor %}
+    </select> 
+    <input type="submit" value="switch form" />
+</form>
+
+<h2> Check results </h2>
+<form action="/results/" method="GET">
+    <select name="pid">
+    {% for poll in polls %}
+    <option {% if poll.name ==  currentpoll  %} selected = "selected" {% endif %} >
+        {{ poll.name }}
+    </option>
+    {% endfor %}
+    </select> 
+    <input type="submit" value="check results" />
+</form>
+{% endblock %}

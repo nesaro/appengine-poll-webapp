@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %} Vote {% endblock %}
+{% block content %}
+<h1> Vote </h1>
+
+{% if error %}
+<h2> {{ error }} </h2>
+{% endif %} 
+
+{% if okmsg %}
+<h2> {{ okmsg }} </h2>
+{% endif %} 
+
+<h2> Vote our poll {{ name }} </h2>
+<form action="/vote_poll/" method="POST">
+    <select name="value">
+    {% for value in values %}
+    <option>
+        {{ value }}
+    </option>
+    {% endfor %}
+    </select> 
+    <input type="hidden" name="poll" value="{{name}}" />
+    <input type="submit" value="vote" />
+</form>
+{% endblock %}

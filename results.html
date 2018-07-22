@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %} Results {% endblock %}
+{% block content %}
+{% if error %}
+<h2> {{ error }} </h2>
+{% endif %} 
+
+{% if okmsg %}
+<h2> {{ okmsg }} </h2>
+{% endif %} 
+
+<h2> Results for poll {{ name }} </h2>
+{% for key, amount in results.items %}
+{{ key }}: {{amount}} <br />
+{% endfor %}
+</form>
+{% endblock %}
